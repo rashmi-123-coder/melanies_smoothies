@@ -1,6 +1,6 @@
 # Import python packages
 import streamlit as st
-from snowflake.snowpark.context import get_active_session
+#from snowflake.snowpark.context import get_active_session
 from snowflake.snowpark.functions import col
 
 helpful_links = [
@@ -23,8 +23,8 @@ st.write('Name on your smoothie will be :',name_on_order)
 
 #option1=st.selectbox('What is your favourite fruit',('Strawberries','Banana','Peaches'))
 #st.write('You have selected the fruit:',option1)
-
-session = get_active_session()
+cnx=st.connection("snowflake")
+session = cnx.session()
 my_dataframe = session.table("smoothies.public.fruit_options").select (col('FRUIT_NAME'))
 ##st.dataframe(data=my_dataframe, use_container_width=True)
 
